@@ -1,330 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Royal Valentine Journey</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pinyon+Script&family=EB+Garamond:ital,wght@1,800&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Royal Valentine Journey</title>
 
-        :root {
-            --romantic-red: #ff385c;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pinyon+Script&family=EB+Garamond:ital,wght@1,800&display=swap');
 
-        body {
-            margin: 0;
-            height: 100vh;
-            overflow: hidden;
-            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+:root {
+    --romantic-red: #ff385c;
+}
 
-        /* --- Enlarge & Pop Heart Physics --- */
-        .pop-heart {
-            position: absolute;
-            color: rgba(255, 56, 92, 0.4);
-            pointer-events: none;
-            z-index: 1;
-            animation: bubblePop 3s ease-in-out forwards;
-        }
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        @keyframes bubblePop {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.5); opacity: 0.8; }
-            100% { transform: scale(2.2) translateY(-50px); opacity: 0; }
-        }
+/* Floating Hearts */
+.pop-heart {
+    position: absolute;
+    color: rgba(255, 56, 92, 0.4);
+    pointer-events: none;
+    z-index: 1;
+    animation: bubblePop 3s ease-in-out forwards;
+}
 
-        .page {
-            position: absolute;
-            width: 100%;
-            height: 100vh;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            z-index: 10;
-        }
+@keyframes bubblePop {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.5); opacity: 0.8; }
+    100% { transform: scale(2.2) translateY(-50px); opacity: 0; }
+}
 
-        .bold-heading { font-size: 3.5rem; font-weight: 900; color: var(--romantic-red); margin: 20px; text-shadow: 1px 1px 5px rgba(255,255,255,0.5); }
-        .sub-heading { font-size: 2rem; font-weight: bold; color: #333; }
+/* Pages */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+}
 
-        /* --- Carousel Slider (Automated) --- */
-        .carousel-container { width: 100%; max-width: 600px; overflow: hidden; position: relative; }
-        .carousel-track { display: flex; transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1); width: 800%; }
-        .slide { width: 12.5%; display: flex; flex-direction: column; align-items: center; padding: 20px; box-sizing: border-box; }
-        
-        /* --- Page 3: Vertical Scrolling Grid (UPDATED FOR MASONRY LOOK) --- */
-        .royal-letter-page { background: #000; overflow: hidden; position: relative; }
-        
-        /* UPDATED: Uses columns instead of grid rows to match reference image */
-        .photo-grid-container {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; 
-            /* Masonry Layout Logic */
-            column-count: 5; 
-            column-gap: 10px;
-            padding: 10px;
-            opacity: 0.35; 
-            pointer-events: none;
-            transform: translateY(-50%);
-            animation: scrollVertical 25s linear infinite;
-        }
+.bold-heading {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--romantic-red);
+}
 
-        @keyframes scrollVertical {
-            0% { transform: translateY(-50%); }
-            100% { transform: translateY(0); }
-        }
+/* Letter Page */
+.royal-letter-page {
+    background: #000;
+    overflow: hidden;
+    position: relative;
+}
 
-        /* UPDATED: Removed aspect-ratio so images fit naturally like the reference */
-        .grid-img {
-            width: 100%; 
-            margin-bottom: 10px; /* Spacing between stacked images */
-            display: block;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            break-inside: avoid; /* Prevents image from being cut between columns */
-        }
+.photo-grid-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    column-count: 5;
+    column-gap: 10px;
+    padding: 10px;
+    opacity: 0.35;
+    pointer-events: none;
+    transform: translateY(-50%);
+    animation: scrollVertical 25s linear infinite;
+}
 
-        /* --- Letter Styling --- */
-        .letter-content {
-            z-index: 100;
-            background: rgba(253, 245, 230, 0.95);
-            padding: 40px 50px;
-            width: 80%;
-            max-width: 550px;
-            border: 8px double #5d4037;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
-            position: relative;
-            transform: translateY(100vh);
-            transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        .letter-content.active { transform: translateY(0); }
+@keyframes scrollVertical {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
+}
 
-        .bubu-dudu-top {
-            position: absolute;
-            top: -70px;
-            right: -30px;
-            width: 140px;
-            z-index: 110;
-            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2));
-        }
+.grid-img {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    break-inside: avoid;
+}
 
-        #typewriter { font-family: 'Pinyon Script', cursive; font-size: 2rem; color: #2c1e1a; text-align: left; line-height: 1.5; }
-        
-        .wax-seal { 
-            width: 120px; 
-            height: 120px; 
-            position: absolute; 
-            bottom: -60px; 
-            left: 50%; 
-            transform: translateX(-50%) scale(5); 
-            opacity: 0; 
-            transition: 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); 
-        }
-        .wax-seal img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(2px 5px 5px rgba(0,0,0,0.3)); }
-        .wax-seal.drop { opacity: 1; transform: translateX(-50%) scale(1); }
+.letter-content {
+    z-index: 100;
+    background: rgba(253, 245, 230, 0.95);
+    padding: 40px;
+    width: 80%;
+    max-width: 550px;
+    border: 8px double #5d4037;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    position: relative;
+    transform: translateY(100vh);
+    transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
 
-        /* --- Utilities --- */
-        .gif-box { width: 320px; height: 280px; border-radius: 20px; overflow: hidden; background: white; padding: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .gif-box img { width: 100%; height: 100%; object-fit: contain; }
-        .action-btn { padding: 15px 45px; font-size: 1.8rem; font-weight: 900; border-radius: 50px; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .action-btn:hover { transform: scale(1.05); }
-        #yesBtn { background: #4CAF50; color: white; }
-        #noBtn { background: #f44336; color: white; }
-    </style>
+.letter-content.active {
+    transform: translateY(0);
+}
+
+#typewriter {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 2rem;
+    color: #2c1e1a;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.wax-seal {
+    width: 120px;
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%) scale(5);
+    opacity: 0;
+    transition: 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wax-seal img {
+    width: 100%;
+}
+
+.wax-seal.drop {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+/* Buttons */
+.action-btn {
+    padding: 15px 45px;
+    font-size: 1.8rem;
+    font-weight: 900;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.action-btn:hover {
+    transform: scale(1.05);
+}
+
+#yesBtn { background: #4CAF50; color: white; }
+#noBtn { background: #f44336; color: white; }
+
+.gif-box {
+    width: 320px;
+    height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    padding: 10px;
+}
+.gif-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+</style>
 </head>
+
 <body>
 
-    <div id="heart-field"></div>
+<div id="heart-field"></div>
 
-    <audio id="bgMusic" loop>
-        <source src="song.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+<audio id="bgMusic" loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
 
-    <div id="page1" class="page" style="display: flex;">
-        <div class="gif-box"><img id="main-gif" src="bubu-dudu-rides.webp"></div>
-        <h1 class="bold-heading">Will you be my valentine?</h1>
-        <div style="display: flex; gap: 30px; min-height: 150px; align-items: center; position: relative; width: 100%; justify-content: center;">
-            <button id="yesBtn" class="action-btn">❤️ Yes ❤️</button>
-            <button id="noBtn" class="action-btn">No</button>
+<!-- PAGE 1 -->
+<div id="page1" class="page" style="display:flex;">
+    <div class="gif-box">
+        <img id="main-gif" src="bubu-dudu-rides.webp">
+    </div>
+    <h1 class="bold-heading">Will you be my Valentine?</h1>
+    <div style="display:flex; gap:30px; margin-top:30px;">
+        <button id="yesBtn" class="action-btn">❤️ Yes ❤️</button>
+        <button id="noBtn" class="action-btn">No</button>
+    </div>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page royal-letter-page">
+    <div class="photo-grid-container" id="grid-container"></div>
+    <div class="letter-content" id="letter">
+        <div id="typewriter"></div>
+        <div class="wax-seal" id="seal">
+            <img src="my-stamp.png">
         </div>
     </div>
+</div>
 
-    <div id="page2" class="page">
-        <h2 class="bold-heading">Our Valentine's Journey...</h2>
-        <div class="carousel-container">
-            <div class="carousel-track" id="track"></div>
-        </div>
-        <button id="goLetter" class="action-btn" style="background: var(--romantic-red); color: white; margin-top: 30px; display: none;">Open My Letter ✉️</button>
-    </div>
+<script>
+const sadGifs = [
+"bubu-dudu-sseeyall.webp",
+"bubu-dudu-sseeyall (1).webp",
+"bubu-dudu-sseeyall (2).webp",
+"Khoc.webp"
+];
 
-    <div id="page3" class="page royal-letter-page">
-        <div class="photo-grid-container" id="grid-container"></div>
-        <div class="letter-content" id="letter">
-            <img src="bubu-dudu-corner.webp" class="bubu-dudu-top" alt="Bubu Dudu">
-            <div id="typewriter"></div>
-            <div class="wax-seal" id="seal">
-                <img src="my-stamp.png" alt="Royal Stamp">
-            </div>
-        </div>
-    </div>
+const myPhotos = [
+"p1.png","p2.png","p3.png","p4.png","p5.png",
+"p6.png","p7.png","p8.png","p9.png","p10.png",
+"p11.png","p12.png","p13.png","p14.png","p15.png",
+"p16.png","p17.png","p18.png","p19.png","p20.png"
+];
 
-    <script>
-        // Data Setup
-        const sadGifs = ["bubu-dudu-sseeyall.webp", "bubu-dudu-sseeyall (1).webp", "bubu-dudu-sseeyall (2).webp", "Khoc.webp"];
-        
-        // Ensure you have 20 photos for the best grid effect
-        const myPhotos = ["p1.png", "p2.png", "p3.png", "p4.png", "p5.png", "p6.png", "p7.png", "p8.png", "p9.png", "p10.png", "p11.png", "p12.png", "p13.png", "p14.png", "p15.png", "p16.png", "p17.png", "p18.png", "p19.png", "p20.png"];
-        
-        const dayData = [
-            { d: "Happy Rose Day", g: "rose.webp", m: "You are the most beautiful bloom in the garden of my life. Just like a rose, your presence adds color and a sweet fragrance to every single day. 🌹" },
-            { d: "Happy Propose Day", g: "propose.webp", m: "I choose you today, tomorrow, and for every moment that follows. Walking through life’s journey is only meaningful because I get to hold your hand through it all. 💍" },
-            { d: "Happy Chocolate Day", g: "chocolate.webp", m: "Your love is the sweetest treat I have ever known. Life with you is a rich, delightful experience that leaves me craving your smile and your kindness every day. 🍫" },
-            { d: "Happy Teddy Day", g: "teddy.webp", m: "Whenever I am not there to hold you, let this be a reminder of my warmth. You are my favorite person to cuddle and my soft place to land. 🧸" },
-            { d: "Happy Promise Day", g: "promise.webp", m: "I promise to stand by you through every storm and sunshine. My commitment to your happiness is unwavering, and I will cherish our beautiful bond for a lifetime. 🤝" },
-            { d: "Happy Hug Day", g: "hug.webp", m: "Your arms are my favorite destination and my safest haven. One embrace from you makes all my worries vanish, replacing them with a sense of peace and true belonging. 🤗" },
-            { d: "Happy Kiss Day", g: "kiss.webp", m: "A single kiss from you speaks more than a thousand words ever could. It is the spark that ignites my soul and the sweet seal of our eternal love. 💋" },
-            { d: "Happy Valentine's Day Babe", g: "valentine.webp", m: "You are my heart, my soul, and my entire world. Today is a celebration of the incredible love we share, and I am so grateful to call you mine. ❤️" }
-        ];
+let moveCount = 0;
+let noClickCount = 0;
+let yesPadding = 15;
+let yesFontSize = 1.8;
 
-        let moveCount = 0;
-        let noClickCount = 0;
-        let yesPadding = 15;
-        let yesFontSize = 2.8;
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+const mainGif = document.getElementById('main-gif');
 
-        const noBtn = document.getElementById('noBtn');
-        const yesBtn = document.getElementById('yesBtn');
-        const mainGif = document.getElementById('main-gif');
+/* Floating Hearts */
+setInterval(() => {
+    const h = document.createElement('div');
+    h.className = 'pop-heart';
+    h.innerHTML = '❤️';
+    h.style.left = Math.random()*95 + 'vw';
+    h.style.top = Math.random()*95 + 'vh';
+    h.style.fontSize = (Math.random()*30+20)+'px';
+    document.getElementById('heart-field').appendChild(h);
+    setTimeout(()=>h.remove(),3000);
+},400);
 
-        // --- Global Heart Pop System ---
-        setInterval(() => {
-            const h = document.createElement('div');
-            h.className = 'pop-heart';
-            h.innerHTML = '❤️';
-            h.style.left = Math.random() * 95 + 'vw';
-            h.style.top = Math.random() * 95 + 'vh';
-            h.style.fontSize = (Math.random() * 30 + 20) + 'px';
-            document.getElementById('heart-field').appendChild(h);
-            setTimeout(() => h.remove(), 3000);
-        }, 400);
+/* No Button Movement */
+noBtn.addEventListener('mouseover',()=>{
+    if(moveCount<3){
+        noBtn.style.position='fixed';
+        noBtn.style.left=Math.random()*80+'vw';
+        noBtn.style.top=Math.random()*80+'vh';
+        moveCount++;
+    }
+});
 
-        // --- Page 1 Logic ---
-        noBtn.addEventListener('mouseover', () => {
-            if (moveCount < 3) {
-                const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 50);
-                const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 50);
-                noBtn.style.position = 'fixed';
-                noBtn.style.left = x + 'px';
-                noBtn.style.top = y + 'px';
-                moveCount++;
-            } else {
-                noBtn.style.position = 'static';
-                noBtn.style.left = 'auto';
-                noBtn.style.top = 'auto';
-            }
-        });
+noBtn.addEventListener('click',()=>{
+    if(moveCount>=3){
+        noClickCount++;
+        mainGif.src = sadGifs[Math.min(noClickCount-1,sadGifs.length-1)];
+        yesPadding+=10;
+        yesFontSize+=0.2;
+        yesBtn.style.padding=`${yesPadding}px ${yesPadding*2.5}px`;
+        yesBtn.style.fontSize=`${yesFontSize}rem`;
+        noBtn.innerText="Please 🥺";
+    }
+});
 
-        noBtn.addEventListener('click', () => {
-            if (moveCount >= 3) {
-                noClickCount++;
-                mainGif.src = sadGifs[Math.min(noClickCount - 1, sadGifs.length - 1)];
-                yesPadding += 10;
-                yesFontSize += 0.2;
-                yesBtn.style.padding = `${yesPadding}px ${yesPadding * 2.5}px`;
-                yesBtn.style.fontSize = `${yesFontSize}rem`;
-                const texts = ["Are you sure?", "Really??", "Please...", "You're mean! 🥺","Why Nooo","You don't love me nah..."];
-                noBtn.innerText = texts[Math.min(noClickCount - 1, texts.length - 1)];
-            }
-        });
+/* YES CLICK → DIRECT TO LETTER */
+yesBtn.addEventListener('click',()=>{
+    document.getElementById('bgMusic').play();
+    document.getElementById('page1').style.display='none';
+    document.getElementById('page3').style.display='flex';
 
-        // --- Page 2 Automated Carousel ---
-        const track = document.getElementById('track');
-        dayData.forEach(item => {
-            const slide = document.createElement('div');
-            slide.className = 'slide';
-            slide.innerHTML = `<div class="gif-box"><img src="${item.g}"></div><h2 class="sub-heading">${item.d}</h2><p style="font-size: 1.6rem; color: #ff385c; font-weight:bold;">${item.m}</p>`;
-            track.appendChild(slide);
-        });
+    const grid=document.getElementById('grid-container');
+    const shuffled=[...myPhotos].sort(()=>Math.random()-0.5);
+    const doubled=[...shuffled,...shuffled];
 
-        let curSlide = 0;
-        let autoSlideInterval;
+    doubled.forEach(src=>{
+        const img=document.createElement('img');
+        img.src=src;
+        img.className='grid-img';
+        grid.appendChild(img);
+    });
 
-        const moveSlide = () => {
-            track.style.transform = `translateX(-${curSlide * 12.5}%)`;
-            if (curSlide === 7) {
-                clearInterval(autoSlideInterval);
-                document.getElementById('goLetter').style.display = 'block';
-            }
-        };
+    setTimeout(()=>{
+        document.getElementById('letter').classList.add('active');
+        typeLetter(`My Dear Love,
 
-        yesBtn.addEventListener('click', () => {
-            // ADDED: Play music on first interaction
-            const music = document.getElementById('bgMusic');
-            music.play().catch(error => console.log("Audio play failed (user interaction required):", error));
+You are my forever and always.
+In a world full of temporary things,
+you are my constant.
 
-            document.getElementById('page1').style.display = 'none';
-            document.getElementById('page2').style.display = 'flex';
-            // Start automated transitions
-            autoSlideInterval = setInterval(() => {
-                if (curSlide < 7) {
-                    curSlide++;
-                    moveSlide();
-                }
-            }, 2000);
-        });
+I love you beyond words,
+beyond time,
+beyond forever.
+Thank you for being choosing me !!!
 
-        // --- Page 3 Letter & Grid Logic ---
-        document.getElementById('goLetter').addEventListener('click', () => {
-            document.getElementById('page2').style.display = 'none';
-            document.getElementById('page3').style.display = 'flex';
-            
-            // Populate the Grid
-            const gridContainer = document.getElementById('grid-container');
-            gridContainer.innerHTML = ''; // Clear just in case
+Yours Eternally ❤️`);
+    },1000);
+});
 
-            // 1. Shuffle photos
-            const shuffledPhotos = [...myPhotos].sort(() => Math.random() - 0.5);
-            
-            // 2. DUPLICATE the array to create the infinite loop buffer
-            const doubledPhotos = [...shuffledPhotos, ...shuffledPhotos];
-            
-            doubledPhotos.forEach(src => {
-                const img = document.createElement('img');
-                img.src = src;
-                img.className = 'grid-img';
-                gridContainer.appendChild(img);
-            });
-
-            setTimeout(() => {
-                document.getElementById('letter').classList.add('active');
-                // Replace with your actual message
-                typeLetter("My Dear Mandeep,\n\nYou are the best thing I’ve ever held onto. In a world full of temporary things, you are my 'always.' Thank you for being my anchor in the storm and my sunshine on the good days.\n\nI love you beyond words, beyond time, and beyond forever.\n\nYours Eternally,\nMalkit");
-            }, 1000);
-        });
-
-        function typeLetter(text) {
-            let i = 0;
-            const target = document.getElementById('typewriter');
-            target.innerHTML = ''; 
-            function typing() {
-                if (i < text.length) {
-                    target.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
-                    i++;
-                    setTimeout(typing, 50); 
-                } else {
-                    setTimeout(() => document.getElementById('seal').classList.add('drop'), 500);
-                }
-            }
-            typing();
+function typeLetter(text){
+    let i=0;
+    const target=document.getElementById('typewriter');
+    target.innerHTML='';
+    function typing(){
+        if(i<text.length){
+            target.innerHTML+= text[i]==='\n' ? '<br>' : text[i];
+            i++;
+            setTimeout(typing,50);
+        }else{
+            setTimeout(()=>document.getElementById('seal').classList.add('drop'),500);
         }
-    </script>
+    }
+    typing();
+}
+</script>
+
 </body>
-
 </html>
-
